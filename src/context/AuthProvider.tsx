@@ -1,4 +1,5 @@
 import { createContext, type ReactNode, useCallback, useContext, useMemo, useRef, useState } from 'react';
+import { trackLogin } from '../analytics';
 
 const GOOGLE_SCOPE =
   'https://www.googleapis.com/auth/calendar.events.readonly https://www.googleapis.com/auth/calendar.settings.readonly';
@@ -72,6 +73,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
         setAccessToken(response.access_token);
         setAuthError(null);
+        trackLogin();
       },
       error_callback: (error) => {
         setIsInitializing(false);

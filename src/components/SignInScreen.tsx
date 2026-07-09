@@ -90,8 +90,14 @@ export function SignInScreen() {
             Sign in to your calendar to turn your schedule into a Mondrian-inspired masterpiece. An organised modernist
             masterpiece of bold lines, bright moments, perfect balance. Just the way your life should be run.
           </p>
-          <button type="button" onClick={signIn} disabled={isInitializing} aria-label="Sign in with Google">
-            {isInitializing ? 'Connecting...' : 'Sign in with Google'}
+          <button
+            type="button"
+            className="google-signin-button"
+            onClick={signIn}
+            disabled={isInitializing}
+            aria-label={isInitializing ? 'Connecting to Google' : 'Sign in with Google'}
+          >
+            <img src="/signinwithgoogle.svg" alt="" aria-hidden="true" />
           </button>
           {authError && <p className="error-message">{authError}</p>}
           <p>This app will ask for permission to view your calendar. It cannot edit your calendar.</p>
