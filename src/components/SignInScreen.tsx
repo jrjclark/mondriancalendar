@@ -87,8 +87,8 @@ export function SignInScreen() {
         <div className="signin-copy">
           <h1 id="signin-title">Mondrian Calendar</h1>
           <p>
-            Sign in to your Google Calendar to turn your schedule into a Mondrian-inspired masterpiece. An organised
-            modernist masterpiece of bold lines, bright moments, perfect balance. Just the way your life should be run.
+            Sign in to your calendar to turn your schedule into a Mondrian-inspired masterpiece. An organised modernist
+            masterpiece of bold lines, bright moments, perfect balance. Just the way your life should be run.
           </p>
           <button type="button" onClick={signIn} disabled={isInitializing} aria-label="Sign in with Google">
             {isInitializing ? 'Connecting...' : 'Sign in with Google'}
@@ -105,6 +105,10 @@ export function SignInScreen() {
           </button>
         </div>
       </section>
+      <nav className="signin-legal-links" aria-label="Legal links">
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/privacy.html">Privacy Policy</a>
+      </nav>
     </main>
   );
 }

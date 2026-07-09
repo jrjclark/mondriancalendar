@@ -1,4 +1,6 @@
+import type { CSSProperties } from 'react';
 import type { ArtStyle, CalendarEvent, WeekStart } from '../types/calendar';
+import { boogieLineVariables } from '../utils/boogie';
 import {
   WEEKDAY_LABELS,
   getCurrentWeekRowIndex,
@@ -61,12 +63,16 @@ export function MonthView({ events, anchorDate, weekStart, paintingMode, artStyl
           const visibleEvents = dayEvents.slice(0, 4);
           const isOutsideMonth = !isSameMonth(day, anchorDate);
           const isToday = isSameDay(day, today);
+          const dayBoogieStyle = isBoogieWoogie
+            ? (boogieLineVariables(day.toISOString()) as CSSProperties)
+            : undefined;
 
           return (
             <section
               className={`month-day${isOutsideMonth ? ' is-muted' : ''}${isToday ? ' is-today' : ''}`}
               key={day.toISOString()}
               aria-label={`${day.toDateString()}, ${dayEvents.length} events`}
+              style={dayBoogieStyle}
             >
               <header>
                 <strong>{day.getDate()}</strong>

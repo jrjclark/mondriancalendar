@@ -7,6 +7,7 @@ import {
   getWeekDays,
   isSameDay,
 } from '../utils/date';
+import { boogieLineOffset, boogieLineVariables } from '../utils/boogie';
 import { getAllDayEventsForDay, getTimedSegmentsForDay, splitEventsForDay } from '../utils/layout';
 import { EventBlock } from './EventBlock';
 import { MondrianGrid } from './MondrianGrid';
@@ -90,6 +91,9 @@ export function WeekView({
           const visibleTimeMarkers = getVisibleTimeMarkers(day, timedSegments, visibleStartHour, timeMarkers);
           const isToday = isSameDay(day, today);
           const isEmphasizedDay = day.toDateString() === emphasizedDayKey;
+          const dayBoogieStyle = isBoogieWoogie
+            ? (boogieLineVariables(day.toISOString()) as CSSProperties)
+            : undefined;
           const timelineColumnCount = Math.max(1, ...timedSegments.map((segment) => segment.columnCount));
           const hasTimelineSplit = timelineColumnCount > 1;
           const eventBoundaries = Array.from(
@@ -114,6 +118,7 @@ export function WeekView({
             <section
               className={`week-day${isToday ? ' is-today' : ''}${isEmphasizedDay ? ' is-emphasized' : ''}`}
               key={day.toISOString()}
+              style={dayBoogieStyle}
             >
               <header className="week-day-header">
                 <span>{WEEKDAY_LABELS[day.getDay()]}</span>
@@ -141,7 +146,12 @@ export function WeekView({
                   <div
                     className={`time-marker${hour === visibleStartHour || hour === VISIBLE_END_HOUR ? ' time-marker--edge' : ''}`}
                     key={hour}
-                    style={{ top: `${((hour - visibleStartHour) / (VISIBLE_END_HOUR - visibleStartHour)) * 100}%` }}
+                    style={
+                      {
+                        top: `${((hour - visibleStartHour) / (VISIBLE_END_HOUR - visibleStartHour)) * 100}%`,
+                        '--boogie-h-offset': boogieLineOffset(`${day.toISOString()}:time-marker:${hour}`),
+                      } as CSSProperties
+                    }
                   />
                 ))}
 
@@ -151,7 +161,12 @@ export function WeekView({
                       aria-hidden="true"
                       className="timeline-split-line"
                       key={index}
-                      style={{ left: `${((index + 1) / timelineColumnCount) * 100}%` }}
+                      style={
+                        {
+                          left: `${((index + 1) / timelineColumnCount) * 100}%`,
+                          '--boogie-v-offset': boogieLineOffset(`${day.toISOString()}:timeline-split:${index}`),
+                        } as CSSProperties
+                      }
                     />
                   ))}
 
@@ -166,7 +181,10 @@ export function WeekView({
                         left: `${boundary.left}%`,
                         top: `${boundary.top}%`,
                         width: `${boundary.width}%`,
-                      }}
+                        '--boogie-h-offset': boogieLineOffset(
+                          `${day.toISOString()}:event-boundary:${boundary.left}:${boundary.width}:${boundary.top}`,
+                        ),
+                      } as CSSProperties}
                     />
                   ))}
 
