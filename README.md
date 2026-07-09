@@ -4,8 +4,9 @@ A read-only Google Calendar viewer inspired by Piet Mondrian: bold black lines, 
 
 ## Features
 
-- Google OAuth sign-in with the minimum Calendar scope:
-  `https://www.googleapis.com/auth/calendar.readonly`
+- Google OAuth sign-in with narrow read-only Calendar scopes:
+  `https://www.googleapis.com/auth/calendar.events.readonly`
+  `https://www.googleapis.com/auth/calendar.settings.readonly`
 - Weekly and monthly views
 - Previous, next, and today navigation
 - Current weekday emphasis for Mondrian-like asymmetry
@@ -74,10 +75,11 @@ For a deployed production domain, add that domain to the OAuth client’s **Auth
 The app requests only:
 
 ```text
-https://www.googleapis.com/auth/calendar.readonly
+https://www.googleapis.com/auth/calendar.events.readonly
+https://www.googleapis.com/auth/calendar.settings.readonly
 ```
 
-This allows the app to read calendar events. It does not allow creating, editing, deleting, moving, inviting, or managing calendars.
+These scopes allow the app to read calendar events and read Calendar settings such as week start and hidden-weekend preferences. They do not allow creating, editing, deleting, moving, inviting, or managing calendars.
 
 ## App Structure
 

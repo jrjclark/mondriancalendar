@@ -1,6 +1,7 @@
 import { createContext, type ReactNode, useCallback, useContext, useMemo, useRef, useState } from 'react';
 
-const GOOGLE_SCOPE = 'https://www.googleapis.com/auth/calendar.readonly';
+const GOOGLE_SCOPE =
+  'https://www.googleapis.com/auth/calendar.events.readonly https://www.googleapis.com/auth/calendar.settings.readonly';
 const GIS_SCRIPT_ID = 'google-identity-services';
 const GIS_SCRIPT_SRC = 'https://accounts.google.com/gsi/client';
 
