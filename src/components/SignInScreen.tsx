@@ -94,14 +94,14 @@ export function SignInScreen() {
             {isInitializing ? 'Connecting...' : 'Sign in with Google'}
           </button>
           {authError && <p className="error-message">{authError}</p>}
-          <p className="scope-note">Uses read-only access. This cannot edit your calendar.</p>
+          <p className="scope-note">This app will ask for permission to view your calendar. It cannot edit your calendar.</p>
           <button
             type="button"
             className="details-link-button"
             onClick={() => setShowDetails(true)}
             aria-label="Show more details"
           >
-            Click for more details.
+            Click for more details about the app, its features, and Mondrian's artworks.
           </button>
         </div>
       </section>
