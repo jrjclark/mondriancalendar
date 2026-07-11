@@ -1095,6 +1095,10 @@ button:disabled {
     padding: 0;
   }
 
+  .boogie-woogie {
+    --line-size: 9px;
+  }
+
   .calendar-header {
     gap: 0.65rem;
     padding: 0.6rem;
